@@ -1,0 +1,2 @@
+check file process-accounting with path <%= p("accounting_file") %>
+   start program "/usr/sbin/accton <%= p("accounting_file") %>"

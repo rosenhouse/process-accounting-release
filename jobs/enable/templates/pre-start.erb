@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -e -u
+
+# install required packages
+apt-get update -y
+apt-get install -y acct
+
+# create accounting file
+mkdir -p "$(dirname "<%= p("accounting_file") %>")"
+touch "<%= p("accounting_file") %>"
+
+# symlink default accounting file to custom location
+rm -f /var/log/account/pacct
+ln -s "<%= p("accounting_file") %>" /var/log/account/pacct
+
+# set up log rotation
+cat > /etc/logrotate.d/process-accounting <<EOF
+<%= p("accounting_file") %> {
+  rotate 12
+  monthly
+  compress
+  missingok
+  notifempty
+}
+EOF

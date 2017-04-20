@@ -1,0 +1,12 @@
+---
+name: enable
+
+templates:
+  pre-start.erb: bin/pre-start
+
+packages: []
+
+properties:
+  accounting_file:
+    description: "Path on disk where process accounting data will be saved"
+    default: "/var/vcap/data/process-accounting/pacct"
